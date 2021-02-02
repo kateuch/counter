@@ -1,20 +1,23 @@
 
-import React, { useCallback, useEffect, useState } from 'react';
+import Input from '../common/Input';
+import Button from '../common/Button';
+import { RootStateType } from '../../store/store';
+import style from './../../style/counter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from '../../store/counterReducer';
-import { RootStateType } from '../../store/store';
-import Button from '../Button/Button';
 import CounterDisplay from '../CounterDisplay/CounterDisplay';
-import style from './../../style/counter.module.css'
-
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 
 function CounterSetting() {
 
-    const { counterStartValue, counterMaxValue, value, error } = useSelector((state: RootStateType) => state.counter);
     const dispatch = useDispatch();
-
     const [text, setText] = useState('');
+    const { counterStartValue, counterMaxValue, value, error } = useSelector((state: RootStateType) => state.counter);
+
+    useEffect(() => {
+        (error) ? setText('Invalid values') : setText('enter values & press "set"')
+    }, [error]);
 
     function onmaxValue(curValue: string) {
         dispatch(actionCreators.UpdMaxValueAC(Number(curValue)));
@@ -27,18 +30,7 @@ function CounterSetting() {
     const onSetValues = () => {
         let value = counterStartValue;
         dispatch(actionCreators.SetValuesAC(value));
-        // setMaxValue(counter.counterMaxValue);
-        // setStartValue(counter.counterStartValue);
-    }
-
-   useEffect (() => {
-       ( error) ? setText('Invalid values') : setText('enter values & press "set"')
-   }, [error])
-
-    // useEffect (() => {
-    //   // (value !== counterStartValue) ? setCounter(`enter value and press "set"`) :  setCounter(value)
-    //   console.log(`${value} + 'value rendered' `)
-    // }, [])
+    };
 
     const incButtonHandler = () => {
         dispatch(actionCreators.IncrementAC())
@@ -49,29 +41,29 @@ function CounterSetting() {
         dispatch(actionCreators.ResetAC())
         console.log('reset tab')
     };
+
     return (
         <>
             <div className={style.counterWrapper}>
                 <div className={style.counterDisplay}>
-                    <label>
-                        max value:
-                <input className={error ? style.error_counterDisplay : ''} type='number' value={counterMaxValue}
-                            onChange={(e) => { onmaxValue(e.currentTarget.value) }} />
-                    </label>
-                    <label>
-                        min value:
-                <input className={error ? style.error_counterDisplay : ''} type='number' value={counterStartValue} onChange={(e) => { onstartValue(e.currentTarget.value) }} />
-                    </label>
+                    <Input title='max value:'
+                        value={counterMaxValue}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => { onmaxValue(e.currentTarget.value) }}
+                        error={error} />
+                    <Input title='max value:'
+                        value={counterStartValue}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => { onstartValue(e.currentTarget.value) }}
+                        error={error} />
                 </div>
                 <div className={style.counterBottom}>
-                    
-                    <Button  title ={'SET'}
-                  onClick={onSetValues} 
-                  disabled={error} />
-                
+                    <Button title={'SET'}
+                        onClick={onSetValues}
+                        disabled={error} />
                 </div>
             </div>
-            <CounterDisplay incButtonHandler={incButtonHandler} recButtonHandler={recButtonHandler} text={text} />
+            <CounterDisplay text={text}
+                incButtonHandler={incButtonHandler}
+                recButtonHandler={recButtonHandler} />
         </>
     )
 };
