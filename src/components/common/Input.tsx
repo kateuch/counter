@@ -2,7 +2,7 @@ import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import style from './../../style/Input.module.css'
 
 
-type PropsInputType =
+export type PropsInputType =
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
     & {
         value: string | number,

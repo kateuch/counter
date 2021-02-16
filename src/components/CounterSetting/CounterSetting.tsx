@@ -5,19 +5,13 @@ import { RootStateType } from '../../store/store';
 import style from './../../style/counter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from '../../store/counterReducer';
-import CounterDisplay from '../CounterDisplay/CounterDisplay';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, } from 'react';
 
 
 function CounterSetting() {
 
     const dispatch = useDispatch();
-    const [text, setText] = useState('');
-    const { counterStartValue, counterMaxValue, value, error } = useSelector((state: RootStateType) => state.counter);
-
-    useEffect(() => {
-        (error) ? setText('Invalid values') : setText('enter values & press "set"')
-    }, [error]);
+    const { counterStartValue, counterMaxValue,  error } = useSelector((state: RootStateType) => state.counter);
 
     function onmaxValue(curValue: string) {
         dispatch(actionCreators.UpdMaxValueAC(Number(curValue)));
@@ -30,16 +24,6 @@ function CounterSetting() {
     const onSetValues = () => {
         let value = counterStartValue;
         dispatch(actionCreators.SetValuesAC(value));
-    };
-
-    const incButtonHandler = () => {
-        dispatch(actionCreators.IncrementAC())
-        console.log('increment tab')
-    };
-
-    const recButtonHandler = () => {
-        dispatch(actionCreators.ResetAC())
-        console.log('reset tab')
     };
 
     return (
@@ -61,9 +45,7 @@ function CounterSetting() {
                         disabled={error} />
                 </div>
             </div>
-            <CounterDisplay text={text}
-                incButtonHandler={incButtonHandler}
-                recButtonHandler={recButtonHandler} />
+            
         </>
     )
 };

@@ -25,7 +25,7 @@ export default function CounterDisplay(props: PropsType) {
 
           <Button title={'RESET'}
             onClick={recButtonHandler}
-            disabled={(value != counterMaxValue || error ? true : false)} />
+            disabled={(value !== counterMaxValue || error ? true : false)} />
         </div>
       </div>
     </>
@@ -34,7 +34,7 @@ export default function CounterDisplay(props: PropsType) {
 
 
 //types
-type PropsType = {
+export type PropsType = {
   text: string,
   incButtonHandler: () => void,
   recButtonHandler: () => void,
