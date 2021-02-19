@@ -1,8 +1,9 @@
 import React from 'react';
-import {action} from '@storybook/addon-actions';
-import { ReduxStoreProviderDecorator } from '../../stories/decorators/ReduxStoreProviderDecorator';
+import { action } from '@storybook/addon-actions';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import CounterDisplay, {PropsType} from './CounterDisplay';
+import CounterDisplay, { PropsType } from './CounterDisplay';
+import { ReduxStoreProviderDecorator } from '../../stories/decorators/ReduxStoreProviderDecorator';
+
 
 export default {
     title: 'Display',

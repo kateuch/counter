@@ -4,8 +4,8 @@ const InitialState = {
     value: 0,
     error: false,
     counterIsActive: false,
-    counterMaxValue: Number(localStorage.getItem("maxValue")) || 1,
-    counterStartValue: Number(localStorage.getItem("startValue")) || 0,
+    counterMaxValue: 1,
+    counterStartValue: 0,
 }
 export enum ACTION_TYPES {
     RESET = 'RESET',
@@ -20,11 +20,10 @@ export const counterReducer = (state: InitialStateType = InitialState, action: A
     switch (action.type) {
 
         case ACTION_TYPES.RESET: {
-            let copyState = { ...state }
-            copyState.value = 0
+            let copyState = InitialState
+            
             return copyState
         };
-
         case ACTION_TYPES.INCREMENT:
             let newValue = +state.value;
             return {
@@ -59,8 +58,6 @@ export const counterReducer = (state: InitialStateType = InitialState, action: A
         case ACTION_TYPES.SET_VALUES:
             let copyState = { ...state };
             copyState.value = action.startValue;
-            localStorage.setItem('maxValue', state.counterMaxValue.toString());
-            localStorage.setItem('startValue', state.counterStartValue.toString());
             return {
                 ...copyState,
                 counterIsActive: true

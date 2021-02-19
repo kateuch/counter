@@ -1,17 +1,17 @@
-
 import Input from '../common/Input';
 import Button from '../common/Button';
+import React, { ChangeEvent, } from 'react';
 import { RootStateType } from '../../store/store';
 import style from './../../style/counter.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from '../../store/counterReducer';
-import React, { ChangeEvent, } from 'react';
+
 
 
 function CounterSetting() {
 
     const dispatch = useDispatch();
-    const { counterStartValue, counterMaxValue,  error } = useSelector((state: RootStateType) => state.counter);
+    const { counterStartValue, counterMaxValue, error} = useSelector((state: RootStateType) => state.counter);
 
     function onmaxValue(curValue: string) {
         dispatch(actionCreators.UpdMaxValueAC(Number(curValue)));
@@ -28,14 +28,14 @@ function CounterSetting() {
 
     return (
         <>
-            <div className={style.counterWrapper}>
+            <div className={style.window1st}>
                 <div className={style.counterDisplay}>
-                    <Input title='max value:'
+                    <Input title='max value: '
                         value={counterMaxValue}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => { onmaxValue(e.currentTarget.value) }}
                         error={error} />
-                    <Input title='max value:'
-                        value={counterStartValue}
+                    <Input title='max value: '
+                        value={counterStartValue }
                         onChange={(e: ChangeEvent<HTMLInputElement>) => { onstartValue(e.currentTarget.value) }}
                         error={error} />
                 </div>
@@ -45,7 +45,7 @@ function CounterSetting() {
                         disabled={error} />
                 </div>
             </div>
-            
+
         </>
     )
 };

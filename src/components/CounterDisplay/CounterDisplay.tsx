@@ -13,8 +13,8 @@ export default function CounterDisplay(props: PropsType) {
 
   return (
     <>
-      <div className={style.counterWrapper} >
-        <div className={style.counterDisplay}>
+      <div className={style.window2nd} >
+        <div className={(error || value === counterMaxValue) ? style.counterDisplayError : style.counterDisplay}>
           {counterIsActive ? value : text}
         </div>
         <div className={style.counterBottom}>
