@@ -34,7 +34,7 @@ function CounterSetting() {
                         value={counterMaxValue}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => { onmaxValue(e.currentTarget.value) }}
                         error={error} />
-                    <Input title='max value: '
+                    <Input title='min value: '
                         value={counterStartValue }
                         onChange={(e: ChangeEvent<HTMLInputElement>) => { onstartValue(e.currentTarget.value) }}
                         error={error} />
